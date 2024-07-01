@@ -4,7 +4,7 @@
 
 * ### Go to `VM instances` > Connect with `SSH` 
 * ### Run the following Commands in `SSH`
-* ### ***Export the Value from lab page as showed in the video*** 
+* ### Export the Value from lab page as showed in the video
 
 ```bash
 export API_KEY=""
