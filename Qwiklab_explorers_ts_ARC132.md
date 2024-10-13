@@ -129,7 +129,7 @@ curl -s -X POST -H "Content-Type: application/json" \
 sudo apt-get update
 sudo apt-get install -y jq
 
-curl "https://translation.googleapis.com/language/translate/v2?target=en&key=${API_KEY}&q=${task_4_sentence}" > $task_4_file
+curl "gs://cloud-samples-data/speech/corbeau_renard.flac" > $task_4_file
 
 
 # URL-decode the sentence
