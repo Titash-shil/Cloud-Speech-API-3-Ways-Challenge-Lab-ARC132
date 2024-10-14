@@ -146,7 +146,7 @@ curl -s -X POST \
 curl -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
--d '{"q": "これは日本語です。", "target": "en", "format": "text"}' \
+-d '{\"q\": [\"$decoded_sentence\"], "target": "en", "format": "text"}' \
 "https://translation.googleapis.com/language/translate/v2" > translation_response.txt
 
 ```
