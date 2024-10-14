@@ -145,6 +145,53 @@ curl -s -X POST \
 
 ```
 
+---
+ # If gets error in task-4 only do this below :
+
+ ### paste in `SSH` again :
+
+- Activate the Virtual Environment: Once you're connected via SSH, activate the virtual environment by running:
+
+ ```
+source venv/bin/activate
+```
+- Run the following command to open the file in `nano` :
+```
+nano translate_request.json
+```
+- Then, paste the following JSON content inside:
+
+```
+{
+  "q": "これは日本語です。",
+  "source": "ja",
+  "target": "en",
+  "format": "text"
+}
+```
+# After pasting, save the file and exit the editor:
+
+- To save in nano, press `CTRL + O` , then `Enter`.
+- To exit, press `CTRL + X`.
+
+- Make the API Call by Running this command:
+
+```
+curl -X POST -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+    -H "Content-Type: application/json; charset=utf-8" \
+    --data @translate_request.json \
+    "https://translation.googleapis.com/language/translate/v2" > $task_4_file
+```
+
+- Check the Result:
+
+```
+cat $task_4_file
+```
+
+---
+
+
 # Congratulations ..!!🎉  You completed the lab shortly..😃💯
 
 # *Well done..!* 👏
