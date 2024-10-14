@@ -143,12 +143,6 @@ curl -s -X POST \
   "https://translation.googleapis.com/language/translate/v2/detect?key=${API_KEY}" \
   -o "$task_5_file"
 
-curl -X POST \
--H "Content-Type: application/json" \
--H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
--d '{\"q\": [\"$decoded_sentence\"], "target": "en", "format": "text"}' \
-"https://translation.googleapis.com/language/translate/v2" > translation_response.txt
-
 ```
 
 # Congratulations ..!!🎉  You completed the lab shortly..😃💯
