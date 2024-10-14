@@ -129,7 +129,7 @@ curl -s -X POST -H "Content-Type: application/json" \
 sudo apt-get update
 sudo apt-get install -y jq
 
-curl "gs://cloud-samples-data/speech/corbeau_renard.flac" > $task_4_file
+curl "https://translation.googleapis.com/language/translate/v2?target=en&key=${API_KEY}&q=${task_4_sentence}" > $task_4_file
 
 
 # URL-decode the sentence
@@ -142,6 +142,13 @@ curl -s -X POST \
   -d "{\"q\": [\"$decoded_sentence\"]}" \
   "https://translation.googleapis.com/language/translate/v2/detect?key=${API_KEY}" \
   -o "$task_5_file"
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+-d '{"q": "これは日本語です。", "target": "en", "format": "text"}' \
+"https://translation.googleapis.com/language/translate/v2" > translation_response.txt
+
 ```
 
 # Congratulations ..!!🎉  You completed the lab shortly..😃💯
