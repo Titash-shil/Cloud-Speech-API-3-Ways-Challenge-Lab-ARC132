@@ -28,10 +28,10 @@ task_5_file=""
 ####
 
 ```
+
 export PROJECT_ID=$(gcloud config get-value project)
 
 source venv/bin/activate
-
 
 cat > synthesize-text.json <<EOF
 
@@ -52,14 +52,13 @@ cat > synthesize-text.json <<EOF
         'audioEncoding':'MP3'
     }
 }
-
 EOF
 
 
 curl -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
-  -H "Content-Type: application/json; charset=utf-8" \
-  -d @synthesize-text.json "https://texttospeech.googleapis.com/v1/text:synthesize" \
-  > $task_2_file_name
+-H "Content-Type: application/json; charset=utf-8" \
+-d @synthesize-text.json "https://texttospeech.googleapis.com/v1/text:synthesize" \
+> "$task_2_file_name"
 
 
 
@@ -100,48 +99,42 @@ python tts_decode.py --input "$task_2_file_name" --output "synthesize-text-audio
 
 
 
-# Define variables
-
 audio_uri="gs://cloud-samples-data/speech/corbeau_renard.flac"
 
-# Generate speech_request.json file
+
 cat > "$task_3_request_file" <<EOF
 {
-  "config": {
-    "encoding": "FLAC",
-    "sampleRateHertz": 44100,
-    "languageCode": "fr-FR"
-  },
-  "audio": {
-    "uri": "$audio_uri"
-  }
+"config": {
+"encoding": "FLAC",
+"sampleRateHertz": 44100,
+"languageCode": "fr-FR"
+},
+"audio": {
+"uri": "$audio_uri"
+}
 }
 EOF
 
-# Make API call for French transcription
 curl -s -X POST -H "Content-Type: application/json" \
-    --data-binary @"$task_3_request_file" \
-    "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" \
-    -o "$task_3_response_file"
+--data-binary @"$task_3_request_file" \
+"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" \
+-o "$task_3_response_file"
 
 
+response=$(curl -s -X POST \
+-H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+-H "Content-Type: application/json; charset=utf-8" \
+-d "{\"q\": \"$task_4_sentence\"}" \
+"https://translation.googleapis.com/language/translate/v2?key=${API_KEY}&source=ja&target=en")
+echo "$response" > "$task_4_file"
 
-sudo apt-get update
-sudo apt-get install -y jq
 
-curl "https://translation.googleapis.com/language/translate/v2?target=en&key=${API_KEY}&q=${task_4_sentence}" > $task_4_file
-
-
-# URL-decode the sentence
-decoded_sentence=$(python -c "import urllib.parse; print(urllib.parse.unquote('$task_5_sentence'))")
-
-# Make the Language Detection API request using curl
 curl -s -X POST \
-  -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
-  -H "Content-Type: application/json; charset=utf-8" \
-  -d "{\"q\": [\"$decoded_sentence\"]}" \
-  "https://translation.googleapis.com/language/translate/v2/detect?key=${API_KEY}" \
-  -o "$task_5_file"
+-H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+-H "Content-Type: application/json; charset=utf-8" \
+-d "{\"q\": [\"$task_5_sentence\"]}" \
+"https://translation.googleapis.com/language/translate/v2/detect?key=${API_KEY}" \
+-o "$task_5_file"
 
 ```
 
