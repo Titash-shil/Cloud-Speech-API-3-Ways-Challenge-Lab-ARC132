@@ -1,6 +1,11 @@
 # Cloud Speech API 3 Ways: Challenge Lab || [ARC132](https://www.cloudskillsboost.google/course_templates/700/labs/461583) ||
 
-# # Like, comment, share & Don't forget to subscribe [Qwiklab_Explorers_ts](https://youtube.com/@titashshil?si=RgamNu1dc9jVIbJN) 👍😄🤝
+## # Like, comment, share & Don't forget to subscribe [Qwiklab_Explorers](https://youtube.com/@titashshil?si=RgamNu1dc9jVIbJN) 👍😄🤝
+
+---
+## ⚠️ **Disclaimer:**
+#### This script and guide are provided for educational purposes to help you understand the lab process. Please ensure you understand the steps before using any scripts. Before using the script, I encourage you to open and review it to understand each step.The goal is to help you learn how to complete the labs effectively while following Qwiklabs' terms of service and YouTube's community guidelines.
+---
 
 * ### Go to `VM instances` > Connect with `SSH` 
 * ### Run the following Commands in `SSH`
@@ -139,56 +144,15 @@ curl -s -X POST \
 ```
 
 ---
- # If gets error in task-4 only do this below :
-
- ### paste in `SSH` again :
-
-- Activate the Virtual Environment: Once you're connected via SSH, activate the virtual environment by running:
-
- ```
-source venv/bin/activate
-```
-- Run the following command to open the file in `nano` :
-```
-nano translate_request.json
-```
-- Then, paste the following JSON content inside:
-
-```
-{
-  "q": "これは日本語です。",
-  "source": "ja",
-  "target": "en",
-  "format": "text"
-}
-```
-# After pasting, save the file and exit the editor:
-
-- To save in nano, press `CTRL + O` , then `Enter`.
-- To exit, press `CTRL + X`.
-
-- Make the API Call by Running this command:
-
-```
-curl -X POST -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
-    -H "Content-Type: application/json; charset=utf-8" \
-    --data @translate_request.json \
-    "https://translation.googleapis.com/language/translate/v2" > $task_4_file
-```
-
-- Check the Result:
-
-```
-cat $task_4_file
-```
-
----
 
 
-# Congratulations ..!!🎉  You completed the lab shortly..😃💯
 
-# *Well done..!* 👏
+## Congratulations ..!!🎉  You completed the lab shortly..😃💯
 
-# Thank you for visiting.... :) 🗯️
+## *Well done..!* 👏
 
-# [Qwiklab_Explorers_ts](https://youtube.com/@titashshil?si=RgamNu1dc9jVIbJN)
+## Thank you for visiting.... :) 🗯️
+
+## [Qwiklab_Explorers](https://youtube.com/@titashshil?si=RgamNu1dc9jVIbJN)
+
+## Join to our community [Digital Dominators](https://linktr.ee/digital_dominators)
